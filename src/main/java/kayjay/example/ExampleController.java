@@ -1,7 +1,9 @@
 package kayjay.example;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
@@ -19,5 +21,12 @@ public class ExampleController {
     @RequestMapping(value = "m1", produces = "application/json")
     public ExampleEntity exampleMethod() {
         return new ExampleEntity("ololo", 42);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "m2", consumes = "application/json", produces = "application/json",
+        method = RequestMethod.POST)
+    public String exampleMethodWithParam(@RequestBody ExampleEntity param) {
+        return param.getSomeStringProperty();
     }
 }
